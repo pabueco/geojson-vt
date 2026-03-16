@@ -5,6 +5,12 @@
 ### 🐞 Bug fixes
 - _...Add new stuff here..._
 
+## 6.0.3
+
+### 🐞 Bug fixes
+
+- Fixed goejson updates in case of antimaridian crossing. ([#74](https://github.com/maplibre/geojson-vt/pull/74)) (by [@HarelM](https://github.com/HarelM) and [wayofthefuture](https://github.com/wayofthefuture))
+
 ## 6.0.2
 
 ### 🐞 Bug fixes
