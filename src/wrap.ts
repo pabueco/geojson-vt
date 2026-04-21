@@ -28,10 +28,16 @@ export function wrap(
     const center = clip(features, 1, 0, 1, AxisType.X, -1, 2, options);
     if (center) result.push(...center);
 
-    const right = clip(features, 1, 1, 3, AxisType.X, -1, 2, options);
+    const rightCandidates = features.filter(f => f.maxX > 1 || f.minX >= 1);
+    const right = rightCandidates.length
+      ? clip(rightCandidates, 1, 1, 3, AxisType.X, -1, 2, options)
+      : null;
     if (right) result.push(...shiftFeatureCoords(right, -1));
 
-    const left = clip(features, 1, -2, 0, AxisType.X, -1, 2, options);
+    const leftCandidates = features.filter(f => f.minX < 0);
+    const left = leftCandidates.length
+      ? clip(leftCandidates, 1, -2, 0, AxisType.X, -1, 2, options)
+      : null;
     if (left) result.push(...shiftFeatureCoords(left, 1));
 
     return result;

@@ -43,7 +43,33 @@ describe('worldCopies: false', () => {
         expect(tile.features[1].type).toBe(3);
     });
 
-    test('point at exactly 180° is preserved', () => {
+    test('line touching 180 degrees exactly is not duplicated', () => {
+        const vt = new GeoJSONVT(lineString([[170, 0], [180, 0]]), {
+            worldCopies: false,
+        });
+        const tile = vt.getTile(0, 0, 0);
+        expect(tile.features.length).toBe(1);
+    });
+
+    test('polygon touching 180 degrees exactly is not duplicated', () => {
+        const vt = new GeoJSONVT(polygon([[
+            [170, 10], [180, 10], [180, -10], [170, -10], [170, 10]
+        ]]), {
+            worldCopies: false,
+        });
+        const tile = vt.getTile(0, 0, 0);
+        expect(tile.features.length).toBe(1);
+    });
+
+    test('line touching -180 degrees exactly is not duplicated', () => {
+        const vt = new GeoJSONVT(lineString([[-180, 0], [-170, 0]]), {
+            worldCopies: false,
+        });
+        const tile = vt.getTile(0, 0, 0);
+        expect(tile.features.length).toBe(1);
+    });
+
+    test('point at exactly 180 degrees is preserved', () => {
         const vt = new GeoJSONVT(point([180, 0]), {
             worldCopies: false,
         });
@@ -51,7 +77,7 @@ describe('worldCopies: false', () => {
         expect(tile.features.length).toBe(1);
     });
 
-    test('point at 540° is shifted back', () => {
+    test('point at 540 degrees is shifted back', () => {
         const vt = new GeoJSONVT(point([540, 0]), {
             worldCopies: false,
         });
