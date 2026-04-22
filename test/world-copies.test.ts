@@ -1,6 +1,6 @@
 import {describe, test, expect} from 'vitest';
 import {GeoJSONVT} from '../src';
-import { defaultOptions } from '../src/geojsonvt';
+import {defaultOptions} from '../src/geojsonvt';
 
 const EXTENT = defaultOptions.extent;
 const BUFFER = defaultOptions.buffer;
